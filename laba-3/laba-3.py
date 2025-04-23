@@ -4,11 +4,9 @@
 #Необходимо записать в отдельные текстовые файлы самого старшего и самого младшего
 
 
-
-# Читаем данные из файла и обрабатываем
-min_age = float('inf')
-max_age = -float('inf')
-all_children = []
+mini = float('inf')
+maxi = -float('inf')
+all = []
 
 with open('children.txt', 'r', encoding='utf-8') as f:
     for line in f:
@@ -17,21 +15,19 @@ with open('children.txt', 'r', encoding='utf-8') as f:
             continue
         surname, name, age = line.rsplit(' ', 2)  # Разбиваем строку на 3 части
         age = int(age)
-        all_children.append((age, line))
+        all.append((age, line))
 
-        # Обновляем минимальный и максимальный возраст
-        if age < min_age:
-            min_age = age
-        if age > max_age:
-            max_age = age
+        if age < mini:
+            mini = age
+        if age > maxi:
+            maxi = age
 
-# Записываем результаты в отдельные файлы
 with open('youngest.txt', 'w', encoding='utf-8') as f:
-    for age, child in all_children:
-        if age == min_age:
+    for age, child in all:
+        if age == mini:
             f.write(child + '\n')
 
 with open('oldest.txt', 'w', encoding='utf-8') as f:
-    for age, child in all_children:
-        if age == max_age:
+    for age, child in all:
+        if age == maxi:
             f.write(child + '\n')
